@@ -12,7 +12,7 @@ using namespace std;
 //int main(int argc, char *argv[])
 int main()
 {
-    string filename="testDataX.txt";
+    string filename="testData10.txt";
 //    interface pea(filename, "linux");
 
     graph g(filename);

@@ -3,11 +3,11 @@ import os
 import sys
 from random import randint
 
-filename='testDataX.txt'
-projectDir='/home/kuba/Qt/build-PEA-Desktop_Qt_5_7_0_GCC_64bit-Profile'
+cities=int(sys.argv[1])
+filename='testData{}.txt'.format(cities)
+projectDir='.'
 
 filePath='{}/{}'.format(projectDir,filename)
-cities=int(sys.argv[1])
 maxWeight=10
 
 os.system('echo "{}" > {}'.format(cities,filePath))
