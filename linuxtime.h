@@ -13,5 +13,7 @@ public:
 
 
     void stop();
+
+    int check();
 };
 #endif // LINUXTIME_H

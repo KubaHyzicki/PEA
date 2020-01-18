@@ -15,7 +15,7 @@ void dp::showPath(){
     cout << "finalWeight=" << this->weightSum << endl;
 }
 
-void print(vector <int>path){
+void dp::print(vector <int>path){
     cout << path[0];
     if((int)path.size() > 1){
         for(int i=1;i<(int)path.size();i++){
@@ -64,8 +64,8 @@ tuple<int, vector<int>> dp::goNext(int vert, int visitId, vector <int>notVisited
     if(this->storedPathes.find(storedArg) != this->storedPathes.end()){
         weight=this->storedPathes[storedArg].weight;
         returnPath=this->storedPathes[storedArg].path;
-        print(returnPath);
-        for(int i=0;i<(int)notVisited.size();i++) cout << notVisited[i];
+//        this->print(returnPath);
+//        for(int i=0;i<(int)notVisited.size();i++) cout << notVisited[i];
 //        cout << "ciastko" << endl;            //do zliczania ilości razy gdy korzystamy z gotowych wyników
     }
     //jeśli nie, przejdź ją
@@ -73,7 +73,7 @@ tuple<int, vector<int>> dp::goNext(int vert, int visitId, vector <int>notVisited
         storedPath pathToStore;
         for(int newVisitId=0; newVisitId < (int)notVisited.size(); newVisitId++){
             tie(newWeight, newPath)=goNext(notVisited[newVisitId], newVisitId, notVisited, gr);
-            print(newPath);
+//            this->print(newPath);
             newWeight=newWeight+gr->cities[vert][notVisited[newVisitId]];
             if(newWeight<weight || weight==0){
                 weight=newWeight;
@@ -94,10 +94,12 @@ tuple<int, vector<int>> dp::goNext(int vert, int visitId, vector <int>notVisited
     return make_tuple(weight, returnPath);
 }
 
+
 void dp::findPath(){
     graph *gr=this->gr;
     vector <int>notVisited;
     for(int i=0;i<gr->getVerticesAmount();i++)
         notVisited.push_back(i);
     tie(this->weightSum, this->finalPath) = goNext(0, 0, notVisited, gr);
+    this->showPath();
 }

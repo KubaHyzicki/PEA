@@ -23,6 +23,7 @@ public:
     void findPath();
     tuple<int, vector<int>> goNext(int vert, int visitId, vector <int>notVisited, graph* gr);
     void showPath();
+    void print(vector <int>path);
 };
 
 #endif // DP_H
