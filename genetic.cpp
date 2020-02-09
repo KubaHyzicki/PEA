@@ -1,6 +1,6 @@
 #include "genetic.h"
 
-bool compareRoutes(route firstRoute, route secondRoute){
+bool compareRoutes(routeSA firstRoute, routeSA secondRoute){
     return firstRoute.weight < secondRoute.weight;
 }
 
@@ -38,13 +38,13 @@ int genetic::countPathWeight(vector <int>path){
     return weightSum;
 }
 
-void genetic::printPopulation(vector <route>population){
+void genetic::printPopulation(vector <routeSA>population){
     for(int i=0;i<(int)population.size();i++){
         showPath(population[i].path);
     }
 }
 
-route genetic::generateRandomRoute(){
+routeSA genetic::generateRandomRoute(){
     vector <int>vertices=this->citiesDefault;
     vector <int>path;
     int verId;
@@ -55,10 +55,10 @@ route genetic::generateRandomRoute(){
         vertices.erase(vertices.begin()+verId);
     }
     path.push_back(0);
-    return route{path,countPathWeight(path)};
+    return routeSA{path,countPathWeight(path)};
 }
 
-route genetic::combineRoutes(vector <int>path, vector <int>secondPath){
+routeSA genetic::combineRoutes(vector <int>path, vector <int>secondPath){
     int halfRoutLength=ceil(path.size()/2);
     while(path.size()>halfRoutLength){
         path.pop_back();
@@ -70,10 +70,10 @@ route genetic::combineRoutes(vector <int>path, vector <int>secondPath){
         secondPath.erase(secondPath.begin());
     }
     path.push_back(0);
-    return route{path,countPathWeight(path)};
+    return routeSA{path,countPathWeight(path)};
 }
 
-route genetic::mixRoute(vector <int>path){
+routeSA genetic::mixRoute(vector <int>path){
     int firstID=1+rand()%(path.size()-2);
     int secondID=firstID;
     while(secondID == firstID){
@@ -82,19 +82,13 @@ route genetic::mixRoute(vector <int>path){
     int backupSecondID=path[secondID];
     path.at(secondID)=path[firstID];
     path.at(firstID)=backupSecondID;
-    return route{path,countPathWeight(path)};
+    return routeSA{path,countPathWeight(path)};
 }
 
 void genetic::findPath(){
 //intit population
-    vector <route>population;
+    vector <routeSA>population;
     for(int i=0;i<(int)this->sizeOfPopulation;i++){
-//hmm no w sumie nic się nie powinno stać jeśli nie będę pomijał powtórzeń
-//        if(!(find(population.begin(), population.end(),rt) != population.end())){
-//        route rt=generateRandomRoute();
-//            i--;
-//            continue;
-//        }
         population.push_back(generateRandomRoute());
     }
 

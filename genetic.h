@@ -11,7 +11,7 @@
 #include "linuxtime.h"
 
 
-struct route{
+struct routeSA{
     vector <int>path;
     int weight;
 };
@@ -19,7 +19,7 @@ struct route{
 class genetic{
 public:
     graph *gr;
-    route *routes;
+    routeSA *routes;
     vector <int>citiesDefault;
     int sizeOfPopulation;
     int generationsAmount;
@@ -30,15 +30,15 @@ public:
 
     void findPath();
 
-    route generateRandomRoute();
-    route generateRandomRouteEnd(vector <int>partialPath);
+    routeSA generateRandomRoute();
+    routeSA generateRandomRouteEnd(vector <int>partialPath);
 //used first half of one of them and second half is the order of cities from second
-    route combineRoutes(vector <int>firstPath, vector <int>secondPath);
+    routeSA combineRoutes(vector <int>firstPath, vector <int>secondPath);
 //replace two random cities position on path
-    route mixRoute(vector <int>path);
+    routeSA mixRoute(vector <int>path);
     int countPathWeight(vector <int>path);
 
     void showPath(vector <int>path);
-    void printPopulation(vector <route>population);
+    void printPopulation(vector <routeSA>population);
 };
 #endif // GENETIC_H

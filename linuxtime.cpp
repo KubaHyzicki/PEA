@@ -13,3 +13,8 @@ void linuxtime::stop(){
     cout<<"microseconds: "<<chrono::duration_cast<chrono::microseconds>(end - begining).count()<<endl;
     cout<<"nanoseconds: "<<chrono::duration_cast<chrono::nanoseconds>(end - begining).count()<<endl;
 }
+
+int linuxtime::check(){
+    chrono::steady_clock::time_point now = chrono::steady_clock::now();
+    return (int)chrono::duration_cast<chrono::seconds>(now-begining).count();
+}

@@ -1,4 +1,4 @@
 *exe
 *.pro
-.pro.user
-.txt
+*.pro.user
+*.txt
